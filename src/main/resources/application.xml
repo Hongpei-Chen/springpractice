@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-lazy-init="true">
+    <bean id="messageService" class="org.jeff.chen.sc.xmldemo.MessageServiceImpl">
+        <property name="messageDao" ref="messageDao"/>
+    </bean>
+
+    <bean id="messageDao" class="org.jeff.chen.sc.xmldemo.MessageDao"></bean>
+
+    <bean id="beanComponent" class="org.jeff.chen.sc.xmldemo.BeanComponet">
+        <property name="beanOne" ref="beanOne"/>
+        <property name="integerI" value="2"/>
+    </bean>
+    <bean id="beanOne" class="org.jeff.chen.sc.xmldemo.BeanOne"></bean>
+
+    <!-- bean post processor -->
+    <bean class="org.jeff.chen.sc.postprocesstor.InstantiationTracingBeanPostProcessor"></bean>
+</beans>
