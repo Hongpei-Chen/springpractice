@@ -19,7 +19,7 @@ public class AopAppConfig {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AopAppConfig.class);
         BusinessService businessService = context.getBean(BusinessService.class);
-        System.out.println(businessService.findProductById("水果"));
+        businessService.findProductById("苹果");
     }
 
 }

@@ -1,9 +1,7 @@
 package org.jeff.chen.sc.aop;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,19 +13,29 @@ import org.springframework.stereotype.Component;
 public class AuthAspect {
 
     @Pointcut("execution(* org.jeff.chen.sc.aop.service.BusinessService.*(..))")
-    private void beforePointCut(){};
+    private void pointcut(){};
 
-    @Pointcut("execution(* org.jeff.chen.sc.aop.service.BusinessService.*(..))")
-    private void afterPointCut(){};
 
-    @Before("beforePointCut()")
+    @Before("pointcut()")
     public void doBefore(){
         System.out.println("=========== Before Advice ================");
     }
 
-    @AfterReturning(pointcut = "afterPointCut()", returning = "retVal")
+    @AfterReturning(pointcut = "pointcut()", returning = "retVal")
     public void doAfter(Object retVal){
         String str = (String) retVal;
-        System.out.println("============ After Advice ==============" + str);
+        System.out.println("============ After Advice ==============");
+        System.out.println(str + "添加辣椒");
     }
+
+    @Around("pointcut()")
+    public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("================= Around Before =====================");
+        Object proceed = joinPoint.proceed();
+        System.out.println("环绕通知的返回值：" + (String) proceed);
+        System.out.println("================= Around After ======================");
+        return proceed;
+    }
+
+
 }
