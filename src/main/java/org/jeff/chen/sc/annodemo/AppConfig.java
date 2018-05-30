@@ -1,11 +1,14 @@
 package org.jeff.chen.sc.annodemo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.util.Properties;
 
 /**
  * @author jeff
@@ -15,27 +18,20 @@ import java.nio.file.attribute.UserDefinedFileAttributeView;
 @ComponentScan
 public class AppConfig {
 
-    private UserDao userDao;
-
-    @Autowired
-    public AppConfig(UserDao userDao){
-        this.userDao = userDao;
-    }
-
     @Bean
-    public Service1 service1(UserDao userDao){
-        return new Service1(userDao);
+    public ResourceBundleMessageSource resourceBundleMessageSource(){
+
+        ResourceBundleMessageSource resourceBundleMessageSource =
+                new ResourceBundleMessageSource();
+        resourceBundleMessageSource.setBasenames("exceptions");
+        return resourceBundleMessageSource;
     }
 
-    @Bean
-    public Service2 service2(UserDao userDao){
-        return new Service2(userDao);
+    public static void main(String[] args) {
+
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        MessageExample message = context.getBean(MessageExample.class);
+        message.execute();
     }
-
-    @Bean
-    public UserDao userDao(){
-        return new UserDao();
-    }
-
-
 }

@@ -33,6 +33,14 @@
           <version>5.0.5.RELEASE</version>
       </dependency>
 
+      <!-- Aspectj -->
+      <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjweaver</artifactId>
+          <version>1.9.1</version>
+      </dependency>
+
 
 
       <!-- test -->

@@ -9,7 +9,4 @@
 
     <context:annotation-config/>
 
-    <bean id="annoMain" class="org.jeff.chen.sc.annodemo.AnnoMain"></bean>
-
-    <bean name="annoDemo" class="org.jeff.chen.sc.annodemo.AnnoDemo"></bean>
 </beans>
